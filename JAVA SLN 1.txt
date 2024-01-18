@@ -1,0 +1,368 @@
+1. List Interface.
+The List interface in Java provides a collection of ordered elements, which can be accessed by their index position. It extends the Collection interface and adds functionalities for manipulating ordered collections of elements.
+Some of the key methods provided by the List interface are:
+
+add(int index, E element): Inserts the specified element at the specified position in this list.
+get(int index): Returns the element at the specified position in this list.
+remove(int index): Removes the element at the specified position in this list.
+Some of the commonly used classes that implement the List interface in Java are ArrayList, LinkedList, and Vector.
+2. Set Interface
+The Set interface in Java represents a collection of unique elements, i.e., it does not allow duplicate elements. It extends the Collection interface and adds functionalities for manipulating collections of elements that do not allow duplicates.
+Some of the key methods provided by the Set interface are:
+
+add(E e): Adds the specified element to this set if it is not already present.
+contains(Object o): Returns true if this set contains the specified element.
+remove(Object o): Removes the specified element from this set if it is present.
+Some of the commonly used classes that implement the Set interface in Java are HashSet, LinkedHashSet, and TreeSet.
+3. Queue Interface
+The Queue interface in Java represents a collection of elements that are ordered according to some rules. The rules can be First-In-First-Out (FIFO), Last-In-First-Out (LIFO), or based on some priority.
+Some of the key methods provided by the Queue interface are:
+
+add(E e): Inserts the specified element into the queue.
+remove(): Retrieves and removes the head of the queue.
+peek(): Retrieves, but does not remove, the head of the queue.
+Some of the commonly used classes that implement the Queue interface in Java are PriorityQueue, LinkedList, and ArrayDeque.
+
+Q.2. Explain any two classes of Collections
+HashMap:
+HashMap is a class that implements the Map interface and provides a way to store key-value pairs. It is a very commonly used class in Java as it provides fast and efficient data retrieval. The keys in a HashMap are unique, and the values can be duplicated. HashMap works by using a hash table to store the key-value pairs, which allows for constant-time operations for the basic operations of add, remove, and retrieve.
+Some of the key methods provided by the HashMap class are:
+
+put(K key, V value): Associates the specified value with the specified key in this map.
+get(Object key): Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
+remove(Object key): Removes the mapping for the specified key from this map if present.
+ArrayList:
+ArrayList is a class that implements the List interface and provides a way to store a dynamic array of objects in Java. It is a resizable-array implementation of the List interface, which means that it can grow or shrink as needed.
+Some of the key methods provided by the ArrayList class are:
+
+add(E e): Appends the specified element to the end of this list.
+get(int index): Returns the element at the specified position in this list.
+remove(int index): Removes the element at the specified position in this list.
+ArrayList is very useful when we need to manipulate a large number of objects in Java, and we do not know the size of the array at the time of creation. It provides efficient insertion, deletion, and search operations.
+
+
+Q. 3. Explain Map Interface in detail. Write a Program to Incorporate Student Class into the Map,
+Make sure no Duplicate Entry of Roll no. is allowed.
+Map Interface in Java:
+The Map interface in Java represents a collection of key-value pairs, where each key is unique and maps to a corresponding value. It is an interface that extends the Collection interface, but unlike other collection interfaces, it stores data in a pair of keys and values.
+
+The key-value pairs in a Map are not ordered, but can be retrieved using the key. Some of the commonly used classes that implement the Map interface in Java are HashMap, TreeMap, and LinkedHashMap.
+
+Some of the key methods provided by the Map interface are:
+
+put(K key, V value): Associates the specified value with the specified key in this map.
+get(Object key): Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
+remove(Object key): Removes the mapping for the specified key from this map if present.
+containsKey(Object key): Returns true if this map contains a mapping for the specified key.
+import java.util.*;
+
+class Student {
+    private int rollNo;
+    private String name;
+    
+    public Student(int rollNo, String name) {
+        this.rollNo = rollNo;
+        this.name = name;
+    }
+
+    public int getRollNo() {
+        return rollNo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+public class StudentMapExample {
+    public static void main(String[] args) {
+        Map<Integer, Student> studentMap = new HashMap<>();
+        // Adding students to the map
+        studentMap.put(1, new Student(1, "John"));
+        studentMap.put(2, new Student(2, "Jane"));
+        studentMap.put(3, new Student(3, "Bob"));
+        studentMap.put(4, new Student(4, "Alice"));
+        studentMap.put(5, new Student(5, "Mike"));
+        
+        // Adding a new student with a duplicate roll number
+        Student newStudent = new Student(3, "Mark");
+        int rollNo = newStudent.getRollNo();
+        if(studentMap.containsKey(rollNo)) {
+            System.out.println("Roll number already exists in the map!");
+        } else {
+            studentMap.put(rollNo, newStudent);
+            System.out.println("Student added to the map!");
+        }
+        
+        // Displaying all the students in the map
+        System.out.println("List of all students:");
+        for(Map.Entry<Integer, Student> entry : studentMap.entrySet()) {
+            System.out.println("Roll no: " + entry.getKey() + ", Name: " + entry.getValue().getName());
+        }
+    }
+}
+
+Q.4. Explain any 5 methods that can be applied to List/Map/Set/Queue.
+add(E element): This method is used to add an element to the collection. In List and Queue, the element is added at the end of the collection, while in Set, the element is added if it does not already exist in the collection, and in Map, the element is added as a key-value pair.
+
+remove(Object element): This method is used to remove an element from the collection. In List and Queue, the first occurrence of the element is removed, while in Set, the element is removed if it exists in the collection, and in Map, the key-value pair corresponding to the key is removed.
+
+contains(Object element): This method is used to check if the collection contains the specified element. In List and Queue, this method returns true if the element is present in the collection, while in Set, this method returns true if the element exists in the collection, and in Map, this method returns true if the key is present in the map.
+
+size(): This method is used to return the size of the collection. In List, Set, and Queue, this method returns the number of elements in the collection, while in Map, this method returns the number of key-value pairs in the map.
+
+iterator(): This method is used to return an iterator over the collection. In List, Set, and Queue, this method returns an iterator that can be used to traverse the elements in the collection, while in Map, this method returns an iterator over the key-value pairs in the map.
+
+Q.5. Explain Merge and Compute method with example
+Merge method:
+The merge() method of Map interface is used to merge the values for a specified key using a provided BiFunction. If the specified key is not already associated with a value or is associated with a null value, the provided value is inserted into the map. If the key is already associated with a non-null value, the BiFunction is applied to the existing and new values, and the result is stored in the map. The merge method is useful when we want to combine the values of two keys in a map.
+Here is an example of how to use the merge method in Java:
+Map<String, Integer> map = new HashMap<>();
+map.put("key1", 1);
+map.put("key2", 2);
+
+map.merge("key1", 2, (a, b) -> a + b); // adds 2 to the value of key1
+map.merge("key3", 3, (a, b) -> a + b); // adds a new key-value pair to the map
+
+System.out.println(map); // prints {key1=3, key2=2, key3=3}
+
+Compute method:
+The compute() method of Map interface is used to compute a new value for a specified key using a provided BiFunction. If the specified key is not already associated with a value, the function is not applied, and null is returned. The compute method is useful when we want to perform a calculation on the values of a map.
+Here is an example of how to use the compute method in Java:
+Map<String, Integer> map = new HashMap<>();
+map.put("key1", 1);
+map.put("key2", 2);
+
+map.compute("key1", (key, value) -> value * 2); // doubles the value of key1
+map.compute("key3", (key, value) -> value == null ? 1 : value + 1); // adds a new key-value pair with a value of 1
+
+System.out.println(map); // prints {key1=2, key2=2, key3=1}
+
+Q.6. What is Map.Entry Interface?
+Map.Entry is an interface in Java that represents a key-value pair in a Map. It is a nested interface of the Map interface and provides methods to work with keys and values stored in a Map.
+
+Map.Entry interface has two methods:
+
+getKey(): Returns the key of this map entry.
+getValue(): Returns the value of this map entry.
+Here is an example of how to use the Map.Entry interface in Java:
+Map<String, Integer> map = new HashMap<>();
+map.put("apple", 3);
+map.put("banana", 2);
+
+for(Map.Entry<String, Integer> entry : map.entrySet()) {
+    System.out.println(entry.getKey() + " : " + entry.getValue());
+}
+
+Q.7. Explain with example how can we apply filter() to Maps.
+In Java, we can use the filter() method to filter elements in a Map based on some criteria. The filter() method is a Stream API method and it returns a stream of the filtered elements.
+
+To apply the filter() method to a Map, we first need to convert the Map to a stream of Map.Entry objects using the entrySet() method of the Map interface. Once we have the stream of Map.Entry objects, we can use the filter() method to filter the entries based on some criteria, and then convert the resulting stream back to a Map using the collect() method.
+
+Here is an example of how to use the filter() method to filter a Map based on the values of the entries:
+Map<String, Integer> map = new HashMap<>();
+map.put("apple", 3);
+map.put("banana", 2);
+map.put("cherry", 5);
+map.put("date", 1);
+
+Map<String, Integer> filteredMap = map.entrySet()
+                                     .stream()
+                                     .filter(entry -> entry.getValue() > 2)
+                                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+System.out.println(filteredMap);
+
+Q.8. Explain forEach(). Give two implementations (List, Map)
+The forEach() method is a Java Stream API method that allows us to perform an operation on each element of a collection. It takes a single argument, which is a Consumer functional interface, and applies it to each element of the collection.
+
+Here are two implementations of forEach() for a List and a Map:
+
+forEach() for a List:
+
+List<String> list = Arrays.asList("apple", "banana", "cherry");
+
+list.forEach((element) -> System.out.println(element));
+In this example, we create a List of strings and pass a lambda expression to the forEach() method. The lambda expression is a Consumer functional interface that takes a single argument (the element of the List) and performs an operation on it (in this case, printing it to the console). The forEach() method then applies this lambda expression to each element of the List, and we see the output "apple", "banana", and "cherry" printed to the console.
+
+forEach() for a Map:
+
+Map<String, Integer> map = new HashMap<>();
+map.put("apple", 3);
+map.put("banana", 2);
+map.put("cherry", 5);
+
+map.forEach((key, value) -> System.out.println(key + " has value " + value));
+In this example, we create a Map with String keys and Integer values and pass a lambda expression to the forEach() method. The lambda expression is a BiConsumer functional interface that takes two arguments (the key and the value of the Map entry) and performs an operation on them (in this case, printing them to the console in a formatted string). The forEach() method then applies this lambda expression to each entry of the Map, and we see the output "apple has value 3", "banana has value 2", and "cherry has value 5" printed to the console.
+
+Q.9. Explain Collection framework in brief. (Draw Necessary Diagram)
+The Collection framework in Java provides a set of interfaces, classes, and algorithms to represent and manipulate collections of objects. It is designed to provide a common interface for storing, manipulating, and processing collections of data.
+
+The Collection framework consists of several key interfaces and classes:
+
+Collection: This is the root interface of the collection hierarchy, which defines the basic operations that can be performed on any collection, such as adding, removing, and accessing elements.
+
+List: This is a subinterface of Collection that represents an ordered collection of elements, allowing for duplicate elements.
+
+Set: This is a subinterface of Collection that represents a collection of unique elements, with no specific order.
+
+Map: This is a separate interface that represents a collection of key-value pairs, where each key is unique and the values can be duplicated.
+
+Queue: This is a subinterface of Collection that represents a collection that is designed to hold elements prior to processing, with a specific order and additional operations like peeking, polling, and offering elements.
+                      +--------+
+                      | Object |
+                      +--------+
+                           |
+                           |
+                      +--------+
+                      |  Collection  |
+                      +--------+
+                    /   /    \    \
+                   /   /      \    \
+             +------+   +------+  +------+
+             | List |   | Set  |  | Queue |
+             +------+   +------+  +------+
+                 |           |        |
+                 |           |        |
+             +-------+     +------+
+             | Map   |     |  Deque  |
+             +-------+     +------+
+
+
+
+Q.10. Differentiate between Set and List Interface/ Set and Queue
+Set and List are two interfaces in Java's Collection Framework, while Set and Queue are also interfaces in the Collection Framework. Here are the key differences between these interfaces:
+
+Set vs List:
+
+Ordering: Set does not maintain the insertion order of elements while List maintains the insertion order.
+Duplicates: Set does not allow duplicate elements while List allows duplicate elements.
+Retrieval: In Set, you can retrieve elements using the contains() method, while in List, you can retrieve elements using the get() method based on their index.
+Iteration: Set uses an iterator to iterate over its elements while List can use both an iterator and a list iterator to iterate over its elements.
+Implementation: Some popular Set implementations include HashSet and TreeSet, while popular List implementations include ArrayList and LinkedList.
+Set vs Queue:
+
+Ordering: Set does not maintain the insertion order of elements while Queue maintains the order in which elements are added.
+Duplicates: Set does not allow duplicate elements while Queue allows duplicate elements.
+Retrieval: In Set, you can retrieve elements using the contains() method, while in Queue, you can retrieve elements using the peek() method to view the head of the queue, or the element() method to retrieve the head of the queue.
+Iteration: Set uses an iterator to iterate over its elements while Queue uses an iterator and also provides methods to remove and add elements to the queue.
+Implementation: Some popular Set implementations include HashSet and TreeSet, while popular Queue implementations include LinkedList and PriorityQueue
+
+Q.11. Write a program for Stack Implementation.
+import java.util.*;
+
+public class StackImplementation {
+    public static void main(String[] args) {
+        // create a stack object
+        Stack<String> stack = new Stack<>();
+
+        // push elements into the stack
+        stack.push("element 1");
+        stack.push("element 2");
+        stack.push("element 3");
+
+        // print the top element of the stack
+        System.out.println("Top element: " + stack.peek());
+
+        // pop the top element from the stack
+        String poppedElement = stack.pop();
+        System.out.println("Popped element: " + poppedElement);
+
+        // print the updated stack
+        System.out.println("Stack after popping: " + stack);
+
+        // search an element in the stack
+        int index = stack.search("element 1");
+        if (index == -1) {
+            System.out.println("Element not found in stack");
+        } else {
+            System.out.println("Element found at position " + index);
+        }
+    }
+}
+
+Q.12. Explain how can we use ArrayDeque as Stack
+ArrayDeque is a double-ended queue that can be used as a stack in Java. It is a resizable array implementation of the Deque interface, which means that it can grow or shrink as needed.
+
+Here is an example program that demonstrates how to use ArrayDeque as a stack in Java:
+import java.util.*;
+
+public class ArrayDequeAsStack {
+    public static void main(String[] args) {
+        // create an ArrayDeque object
+        Deque<String> stack = new ArrayDeque<>();
+
+        // push elements into the stack
+        stack.push("element 1");
+        stack.push("element 2");
+        stack.push("element 3");
+
+        // print the top element of the stack
+        System.out.println("Top element: " + stack.peek());
+
+        // pop the top element from the stack
+        String poppedElement = stack.pop();
+        System.out.println("Popped element: " + poppedElement);
+
+        // print the updated stack
+        System.out.println("Stack after popping: " + stack);
+
+        // search an element in the stack
+        int index = ((ArrayDeque<String>) stack).indexOf("element 1");
+        if (index == -1) {
+            System.out.println("Element not found in stack");
+        } else {
+            System.out.println("Element found at position " + (index + 1));
+        }
+    }
+}
+
+Q13. Explain the uniqueness of ArrayDequeue.
+ArrayDeque is a special implementation of the Deque interface in Java, which allows us to implement a double-ended queue using a resizable array. The uniqueness of ArrayDeque comes from its following characteristics:
+
+Resizable Array: ArrayDeque is implemented using a resizable array, which means that it can automatically grow or shrink as required to accommodate the elements added or removed from the deque.
+
+Deque Implementation: ArrayDeque implements the Deque interface in Java, which allows it to provide both stack and queue-like behavior. It allows insertion and removal of elements at both ends of the deque.
+
+Not Thread-Safe: Unlike some other collections in Java, such as Vector and Stack, ArrayDeque is not thread-safe. This means that it should not be accessed by multiple threads concurrently without proper synchronization.
+
+Null Elements: ArrayDeque allows null elements to be added to it, unlike some other collections such as TreeSet or TreeMap, which do not allow null values.
+
+Faster than Stack: As ArrayDeque is implemented using a resizable array, it is faster than the Stack class in Java, which is implemented using a Vector. This is because Vector has the overhead of synchronization, which ArrayDeque does not have.
+
+
+Q.14. Diff. between LinkedHashSet and TreeSet .
+Both LinkedHashSet and TreeSet are implementations of the Set interface in Java, but they differ in their underlying data structures and ordering properties.
+
+Data Structure: LinkedHashSet is implemented using a combination of a hash table and a linked list, whereas TreeSet is implemented using a self-balancing binary search tree.
+
+Ordering: LinkedHashSet maintains the insertion order of elements, whereas TreeSet maintains the natural ordering of elements based on their compareTo() method or an explicit Comparator.
+
+Duplicates: Both LinkedHashSet and TreeSet do not allow duplicate elements, and any attempt to add a duplicate element is ignored.
+
+Performance: LinkedHashSet provides better performance than TreeSet for adding, removing, and retrieving elements, especially for small to medium-sized collections. However, for larger collections, TreeSet provides better performance for searching and iterating through elements due to its self-balancing tree structure.
+
+Memory Usage: LinkedHashSet typically uses more memory than TreeSet due to its underlying linked list.
+
+  Q.15. Explain the use of compareTo Method of Comparable
+The compareTo() method is used to compare two objects of the same class and determine their natural order. It is part of the Comparable interface in Java, which is used to define a natural ordering of objects.
+
+The compareTo() method returns an integer value based on the comparison of two objects. It can return three possible values:
+
+Negative integer: if the object being compared is less than the object being compared to.
+Zero: if the object being compared is equal to the object being compared to.
+Positive integer: if the object being compared is greater than the object being compared to.
+The compareTo() method is useful when we want to sort a collection of objects based on their natural ordering. For example, if we have a collection of Person objects, we could implement the Comparable interface in the Person class and override the compareTo() method to compare based on the person's age. We could then sort the collection of Person objects using the Collections.sort() method, and the compareTo() method would be used to determine the order of the objects.
+
+Q.16. Explain the use to compare() of Comparator 
+The Comparator interface in Java provides a way to define a custom ordering of objects. It is often used to sort collections of objects based on some criteria that cannot be defined by the natural ordering of the objects.
+
+The compare() method is the main method of the Comparator interface, and it takes two objects as arguments and returns an integer value. The return value of the compare() method indicates the ordering of the objects, as follows:
+
+A negative integer if the first object is less than the second object.
+Zero if the first object is equal to the second object.
+A positive integer if the first object is greater than the second object.
